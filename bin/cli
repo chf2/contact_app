@@ -1,0 +1,55 @@
+require 'addressable/uri'
+require 'rest-client'
+
+def create_user
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: '/users.json'
+  ).to_s
+
+  puts RestClient.post(
+    url,
+    { user: { name: "Gizmo", email: "gizmo@gizmo.gizmo" } }
+  )
+end
+
+def edit_user(id)
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: "/users/#{id}"
+  ).to_s
+
+  puts RestClient.patch(url, { user: { name: "EDITED" }})
+end
+
+def delete_user(id)
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: "/users/#{id}"
+  ).to_s
+
+  puts RestClient.delete(url)
+end
+
+begin
+  create_user
+rescue RestClient::Exception
+  puts "create rescued!"
+end
+
+begin
+rescue RestClient::Exception
+  puts "edit rescued!"
+end
+
+begin
+  delete_user(2)
+rescue RestClient::Exception
+  puts "rescued!"
+end
