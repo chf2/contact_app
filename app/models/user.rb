@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :posted_comments, class_name: "Comment", foreign_key: :commenter_id
 
+  has_many :contact_groups
+
   def favorite_contacts
     contacts.where(favorite: true).concat(
        Contact.find(contact_shares
@@ -15,4 +17,7 @@ class User < ActiveRecord::Base
               .map(&:contact_id)))
   end
 
+  def all_contacts
+    contacts + shared_contacts
+  end
 end

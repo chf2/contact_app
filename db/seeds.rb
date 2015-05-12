@@ -32,3 +32,9 @@ ContactShare.create(user_id: 3, contact_id: 3)
 
 Comment.create(commentable_id: 1, commenter_id: 2,
                 body: "test comment", commentable_type: "User")
+
+
+ContactGroup.create(user_id: 3, group_name: "Besties")
+GroupMembership.create(contact_group_id: 1, contact_id: 5)
+GroupMembership.create(contact_group_id: 1, contact_id: 2)
+GroupMembership.create(contact_group_id: 1, contact_id: 3)

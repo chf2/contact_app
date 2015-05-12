@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :destroy, :index, :show, :update] do
     resources :contacts, only: [:index]
     resources :comments, only: [:index]
+    resources :contact_groups, only: [:index, :show]
     member do
       get 'favorites'
     end
@@ -11,4 +12,6 @@ Rails.application.routes.draw do
   end
   resources :contact_shares, only: [:create, :destroy, :update]
   resources :comments, only: [:create, :destroy, :update]
+  resources :contact_groups, only: [:create, :destroy, :update]
+  resources :group_memberships, only: [:create, :destroy]
 end
