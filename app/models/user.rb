@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   end
 
   def all_contacts
-    contacts + shared_contacts
+    contacts.concat(shared_contacts)
   end
 end

@@ -1,7 +1,13 @@
 class ContactsController < ApplicationController
   def index
     user = User.find(params[:user_id])
-    @contacts = user.all_contacts
+
+    @contacts = user.contacts
+                      .where('name LIKE ? AND email LIKE ?',
+                        "%#{params[:name]}%", "%#{params[:email]}%")
+    @contacts.concat(user.shared_contacts
+                          .where('name LIKE ? AND email LIKE ?',
+                            "%#{params[:name]}%", "%#{params[:email]}%"))
     render json: @contacts
   end
 
