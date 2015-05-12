@@ -6,8 +6,8 @@ class ContactsController < ApplicationController
                       .where('name LIKE ? AND email LIKE ?',
                         "%#{params[:name]}%", "%#{params[:email]}%")
     @contacts.concat(user.shared_contacts
-                          .where('name LIKE ? AND email LIKE ?',
-                            "%#{params[:name]}%", "%#{params[:email]}%"))
+                      .where('name LIKE ? AND email LIKE ?',
+                        "%#{params[:name]}%", "%#{params[:email]}%"))
     render json: @contacts
   end
 

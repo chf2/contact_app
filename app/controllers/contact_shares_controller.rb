@@ -24,7 +24,8 @@ class ContactSharesController < ApplicationController
     if contact_share.update(contact_share_params)
       render json: contact_share
     else
-      render json: contact_share.errors.full_messages, status: :unprocessable_entity
+      render(json: contact_share.errors.full_messages,
+              status: :unprocessable_entity)
     end
   end
 
